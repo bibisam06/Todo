@@ -16,7 +16,8 @@ class TodoAdapter(val todoList: MutableList<Todo>) : RecyclerView.Adapter<TodoHo
 // 뷰 홀더 객체를 생성하여 반환
     override fun onBindViewHolder(holder: TodoHolder, position: Int) {
         Log.d("hanbi", "onBindViewHolder : $position")
-        val todo = todoList[position]
-        holder.bind(todo)
+    val todo = todoList[position]
+    holder.binding.todo.text = todo.todo
+    holder.binding.task.text = todo.task
     }
 }
