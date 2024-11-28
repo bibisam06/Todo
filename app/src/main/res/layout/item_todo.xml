@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/item_todo"
     xmlns:app="http://schemas.android.com/apk/res-auto">
    <LinearLayout
        android:layout_width="match_parent"
@@ -14,7 +15,7 @@
        >
 
        <TextView
-           android:id="@+id/task"
+           android:id="@+id/todo"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="|"
@@ -24,7 +25,7 @@
            app:layout_constraintEnd_toEndOf="parent"
            />
        <TextView
-           android:id="@+id/descb"
+           android:id="@+id/task"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="|"
@@ -62,4 +63,4 @@
    </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.recyclerview.widget.RecyclerView>
