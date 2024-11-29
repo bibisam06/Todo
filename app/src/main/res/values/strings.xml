@@ -8,4 +8,7 @@
     <string name="title_activity_add_edit">AddEditActivity</string>
     <string name="todo_delete">DELETE</string>
     <string name="todo_edit">EDIT</string>
+    <string name="todo">TODO</string>
+    <string name="task">TASK</string>
+    <string name="save">SAVE</string>
 </resources>

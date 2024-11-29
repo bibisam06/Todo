@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hanbi.todo.databinding.ItemTodoBinding
 
-class TodoAdapter(val todoList: MutableList<Todo>) : RecyclerView.Adapter<TodoAdapter.TodoHolder>(){
+class TodoAdapter(private var todoList: MutableList<Todo>) : RecyclerView.Adapter<TodoAdapter.TodoHolder>(){
 
 
     inner class TodoHolder(val binding : ItemTodoBinding) : RecyclerView.ViewHolder(binding.root){
@@ -26,5 +26,10 @@ class TodoAdapter(val todoList: MutableList<Todo>) : RecyclerView.Adapter<TodoAd
     override fun onBindViewHolder(holder: TodoAdapter.TodoHolder, position: Int) {
     val todo = todoList[position]
     holder.bind(todo)
+    }
+
+    fun updateData(newtodoList : MutableList<Todo>){
+        todoList = newtodoList
+        notifyDataSetChanged()
     }
     }

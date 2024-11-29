@@ -11,16 +11,17 @@ class TodoStorage (context : Context) {
             Context.MODE_PRIVATE)
     private val gson = Gson()
 
-    fun loadTodos(): ArrayList<Todo> {
+    fun loadTodos(): MutableList<Todo> {
         val json = prefs.getString("todo_list", "")
         val type = object : TypeToken<ArrayList<Todo>>() {}.type
         return if (json.isNullOrEmpty()) ArrayList() else
             gson.fromJson(json, type)
     }
 
-    fun saveTodos(todoList: ArrayList<Todo>) {
+    fun saveTodos(todoList: MutableList<Todo>) {
         val json = gson.toJson(todoList)
         prefs.edit().putString("todo_list", json).apply()
+
     }
 
 }
