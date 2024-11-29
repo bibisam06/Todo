@@ -5,4 +5,7 @@
     <string name="edit">edit</string>
     <string name="hello">hello</string>
     <string name="hello1">hello1</string>
+    <string name="title_activity_add_edit">AddEditActivity</string>
+    <string name="todo_delete">DELETE</string>
+    <string name="todo_edit">EDIT</string>
 </resources>
