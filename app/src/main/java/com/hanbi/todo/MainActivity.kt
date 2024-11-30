@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
         todoList = todoStorage.loadTodos()
         setContentView(binding.root) //초기데이터불러옴.
 
+        adapter = TodoAdapter(todoList, ::onDelete)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = TodoAdapter(todoList)
         binding.recyclerView.adapter = adapter
         //어댑터초기화
         binding.recyclerView.addItemDecoration(
@@ -43,5 +43,13 @@ class MainActivity : AppCompatActivity() {
             val intent : Intent = Intent(this, AddEditActivity::class.java)
             addEditActivityResultLauncher.launch(intent)
         }
+    }
+
+    private fun onDelete(position : Int)  : Unit{ //position -> 투두 -> id값 넘겨주기
+        val todo = todoList[position]
+        todoStorage.deleteTodos(todo.id!!)//DATA Update
+        todoList.removeAt(position)
+        adapter.updateData(todoList)
+
     }
 }

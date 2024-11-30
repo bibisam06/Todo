@@ -1,18 +1,20 @@
 package com.hanbi.todo
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hanbi.todo.databinding.ItemTodoBinding
 
-class TodoAdapter(private var todoList: MutableList<Todo>) : RecyclerView.Adapter<TodoAdapter.TodoHolder>(){
+class TodoAdapter(private var todoList: MutableList<Todo>,
+    val OnDelete : (Int) -> Unit
+    ) : RecyclerView.Adapter<TodoAdapter.TodoHolder>(){
 
 
     inner class TodoHolder(val binding : ItemTodoBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(todo: Todo) {
             binding.task.text = todo.task
             binding.todo.text = todo.todo
+            binding.btnDelete.setOnClickListener{ OnDelete(todo.id!!)}
         }
     }
 
