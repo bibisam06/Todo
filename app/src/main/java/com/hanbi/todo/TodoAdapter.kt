@@ -10,7 +10,6 @@ class TodoAdapter(private var todoList: MutableList<Todo>) : RecyclerView.Adapte
 
 
     inner class TodoHolder(val binding : ItemTodoBinding) : RecyclerView.ViewHolder(binding.root){
-
         fun bind(todo: Todo) {
             binding.task.text = todo.task
             binding.todo.text = todo.todo
