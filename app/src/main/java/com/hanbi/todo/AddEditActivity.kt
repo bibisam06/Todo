@@ -12,7 +12,7 @@ class AddEditActivity : AppCompatActivity() {
     private lateinit var todoStorage: TodoStorage
     private lateinit var todoList: MutableList<Todo>
     //1. 디비 가져오기
-    private val db = openOrCreateDatabase("tododb", Context.MODE_PRIVATE, null)
+    //private val db = openOrCreateDatabase("tododb", Context.MODE_PRIVATE, null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +29,6 @@ class AddEditActivity : AppCompatActivity() {
 
             if(todo.isNotBlank() && task.isNotBlank()){
                 val newTodo = Todo(todo = todo, task = task)
-                //todoList.add(newTodo)
                 todoStorage.saveTodos(newTodo)
 
                 setResult(RESULT_OK)

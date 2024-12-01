@@ -15,7 +15,7 @@ class TodoDBHelper(context : Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         const val COLUMN_TITLE = "title"
         const val COLUMN_DESC = "description"
     }
-    private val db : SQLiteDatabase = TodoDBHelper(context).writableDatabase
+
 
     override fun onCreate(db: SQLiteDatabase?) { //테이블 생성하는 코드, 앱설치 후 한번 실행.
         db!!.execSQL("""create table $TABLE_NAME (

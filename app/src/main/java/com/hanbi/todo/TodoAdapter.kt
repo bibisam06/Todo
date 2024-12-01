@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hanbi.todo.databinding.ItemTodoBinding
 
-class TodoAdapter(private var todoList: MutableList<Todo>,
-    val OnDelete : (Int) -> Unit
+class TodoAdapter(
+    private var todoList: MutableList<Todo>,
+    private val onDelete : (Int) -> Unit
     ) : RecyclerView.Adapter<TodoAdapter.TodoHolder>(){
 
 
@@ -14,7 +15,7 @@ class TodoAdapter(private var todoList: MutableList<Todo>,
         fun bind(todo: Todo) {
             binding.task.text = todo.task
             binding.todo.text = todo.todo
-            binding.btnDelete.setOnClickListener{ OnDelete(todo.id!!)}
+            binding.btnDelete.setOnClickListener{ onDelete(todo.id!!)}
         }
     }
 

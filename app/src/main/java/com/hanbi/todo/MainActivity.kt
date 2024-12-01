@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun onDelete(position : Int)  : Unit{ //position -> 투두 -> id값 넘겨주기
+    private fun onDelete(position : Int) { //position -> 투두 -> id값 넘겨주기
         val todo = todoList[position]
         todoStorage.deleteTodos(todo.id!!)//DATA Update
         todoList.removeAt(position)
