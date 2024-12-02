@@ -26,7 +26,8 @@ class TodoDBHelper(context : Context) : SQLiteOpenHelper(context, DATABASE_NAME,
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("Not yet implemented")
+        db!!.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
+        onCreate(db)
     }
 
 

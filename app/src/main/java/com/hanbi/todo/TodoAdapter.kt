@@ -16,6 +16,7 @@ class TodoAdapter(
             binding.task.text = todo.task
             binding.todo.text = todo.todo
             binding.btnDelete.setOnClickListener{ onDelete(todo.id!!)}
+            //binding.btnEdit.setOnClickListener{ }
         }
     }
 

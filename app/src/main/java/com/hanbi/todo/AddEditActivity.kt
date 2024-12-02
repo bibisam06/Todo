@@ -1,7 +1,5 @@
 package com.hanbi.todo
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +9,7 @@ class AddEditActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddEditBinding
     private lateinit var todoStorage: TodoStorage
     private lateinit var todoList: MutableList<Todo>
-    //1. 디비 가져오기
-    //private val db = openOrCreateDatabase("tododb", Context.MODE_PRIVATE, null)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

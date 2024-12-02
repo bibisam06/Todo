@@ -2,8 +2,6 @@ package com.hanbi.todo
 
 
 import android.database.Cursor
-import com.hanbi.todo.Todo
-import com.hanbi.todo.TodoDBHelper
 import android.content.ContentValues
 import android.content.Context
 import android.content.SharedPreferences
