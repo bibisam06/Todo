@@ -12,11 +12,11 @@ class TodoAdapter(
 
 
     inner class TodoHolder(val binding : ItemTodoBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(todo: Todo) {
+        fun bind(todo: Todo, position : Int) {
             binding.task.text = todo.task
             binding.todo.text = todo.todo
-            binding.btnDelete.setOnClickListener{ onDelete(todo.id!!)}
-            //binding.btnEdit.setOnClickListener{ }
+            binding.btnDelete.setOnClickListener{ onDelete(position)}
+
         }
     }
 
@@ -28,7 +28,7 @@ class TodoAdapter(
     // 뷰 홀더 객체를 생성하여 반환
     override fun onBindViewHolder(holder: TodoAdapter.TodoHolder, position: Int) {
     val todo = todoList[position]
-    holder.bind(todo)
+    holder.bind(todo, position)
     }
 
     fun updateData(newtodoList : MutableList<Todo>){

@@ -2,10 +2,8 @@ package com.hanbi.todo
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hanbi.todo.databinding.ActivityMainBinding
 
@@ -26,21 +24,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         todoStorage = TodoStorage(this)
         todoList = todoStorage.loadTodos()
-        setContentView(binding.root) //초기데이터불러옴.
 
-        adapter = TodoAdapter(todoList, ::onDelete)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = TodoAdapter(todoList, ::onDelete)
         binding.recyclerView.adapter = adapter
-        //어댑터초기화
-        binding.recyclerView.addItemDecoration(
-            DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
-        )
-        binding.fabAdd.setOnClickListener{
-            val intent : Intent = Intent(this, AddEditActivity::class.java)
+
+        binding.fabAdd.setOnClickListener {
+            val intent = Intent(this, AddEditActivity::class.java)
             addEditActivityResultLauncher.launch(intent)
         }
     }
