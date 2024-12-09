@@ -58,12 +58,22 @@ class TodoStorage (context : Context) {
 
     fun deleteTodos(id : Int) : Int{ //id값 -> int 값 받아와서 삭제 -> id값 반환
         val db : SQLiteDatabase = dbHelper.writableDatabase
-        val rowDeleted = db.delete(TodoDBHelper.TABLE_NAME, "${TodoDBHelper.COLUMN_ID} = ?" , arrayOf(id.toString())) //배열형식으로 전달해야함.
+        val rowDeleted = db.delete(TodoDBHelper.TABLE_NAME,  "${TodoDBHelper.COLUMN_ID} = ?",  arrayOf(id.toString())) //배열형식으로 전달해야함.
         db.close()
         return rowDeleted
     }
 
-    fun updateTodos(){
-
+    fun updateTodos(todo : Todo){
+        val db : SQLiteDatabase = dbHelper.writableDatabase
+        val contentValues = ContentValues().apply {
+            put(TodoDBHelper.COLUMN_ID, todo.id)
+            put(TodoDBHelper.COLUMN_TITLE, todo.todo)
+            put(TodoDBHelper.COLUMN_DESC, todo.task)
+        }
+        db.update(TodoDBHelper.TABLE_NAME, contentValues, "${TodoDBHelper.COLUMN_ID} = ?",
+            arrayOf(todo.id.toString())
+        )
     }
+
+
 }

@@ -11,7 +11,7 @@ class TodoDBHelper(context : Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         private const val DATABASE_VERSION = 1
 
         const val TABLE_NAME = "todos"
-        const val COLUMN_ID = "id"
+        var COLUMN_ID = "id"
         const val COLUMN_TITLE = "title"
         const val COLUMN_DESC = "description"
     }

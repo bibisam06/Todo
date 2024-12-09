@@ -13,11 +13,23 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: TodoAdapter
     private lateinit var todoStorage: TodoStorage
 
+
     private val addEditActivityResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
-        if (result.resultCode == RESULT_OK) {
-            todoList = todoStorage.loadTodos()
+        val data = result.data
+        if (data != null) {
+            val todoId = data.getIntExtra("todoId", -1)
+            val updatedTodo = data.getStringExtra("todo") ?: ""
+            val updatedTask = data.getStringExtra("task") ?: ""
+
+            // 리스트에서 해당 ID의 Todo를 찾아 수정
+            todoList.find { it.id == todoId }?.apply {
+                this.todo = updatedTodo
+                this.task = updatedTask
+            }
+
+            // RecyclerView 갱신
             adapter.updateData(todoList)
         }
     }
@@ -31,13 +43,13 @@ class MainActivity : AppCompatActivity() {
         todoList = todoStorage.loadTodos()
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = TodoAdapter(todoList, ::onDelete)
+        adapter = TodoAdapter(todoList, ::onDelete, ::onUpdate)
         binding.recyclerView.adapter = adapter
 
         binding.fabAdd.setOnClickListener {
             val intent = Intent(this, AddEditActivity::class.java)
             addEditActivityResultLauncher.launch(intent)
-        }
+    }
     }
 
     private fun onDelete(position : Int) { //position -> 투두 -> id값 넘겨주기
@@ -48,7 +60,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun onUpdate(){
-
+    private fun onUpdate(position : Int){
+        val todo: Todo = todoList[position]
+        val intent = Intent(this, AddEditActivity::class.java).apply {
+            putExtra("id", todo.id)         // id도 전달
+            putExtra("todo", todo.todo)    // 제목 전달
+            putExtra("task", todo.task)    // 상세 설명 전달
+        }
+        addEditActivityResultLauncher.launch(intent)
     }
 }
