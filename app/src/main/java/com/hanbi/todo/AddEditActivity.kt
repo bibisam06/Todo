@@ -32,12 +32,28 @@ class AddEditActivity : AppCompatActivity() {
             val todo = binding.etTitle.text.toString()
             val task = binding.etDescription.text.toString()
 
-            if(todo.isNotBlank() && task.isNotBlank()){
-                val newTodo = Todo(todo = todo,task = task)
-                todoStorage.saveTodos(newTodo)
-                setResult(RESULT_OK)
-                finish()
+            if(todo.isNotBlank() && task.isNotBlank()) {
+                if (todoId == -1) {
+                    val newTodo = Todo(todo = todo, task = task)
+                    todoStorage.saveTodos(newTodo)
+                    setResult(RESULT_OK)
+                    finish()
+
+                } else {
+                    val resultIntent = Intent().apply {
+                        putExtra("todoId", todoId) // 기존 ID 반환
+                        putExtra("todo", todo)    // 수정된 제목
+                        putExtra("task", task)    // 수정된 내용
+                    }
+                    val newTodo = Todo(id = todoId, todo = todo, task = task)
+                    setResult(RESULT_OK, resultIntent)
+                    todoStorage.updateTodos(newTodo)
+                    todoList.add(newTodo)
+                    adapter.updateData(todoList)// 결과 전달
+                    finish() // AddEditActivity 종료
+
                 }
+            }
             }
         }
 

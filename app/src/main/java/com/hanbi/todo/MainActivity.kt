@@ -13,17 +13,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: TodoAdapter
     private lateinit var todoStorage: TodoStorage
 
-
     private val addEditActivityResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         val data = result.data
-        if (result.resultCode == RESULT_OK) {
-            todoList = todoStorage.loadTodos()
+        if (data != null) {
+            val todoId = data.getIntExtra("todoId", -1)
+            val updatedTodo = data.getStringExtra("todo") ?: ""
+            val updatedTask = data.getStringExtra("task") ?: ""
+
+            // RecyclerView 갱신
             adapter.updateData(todoList)
         }
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,23 +42,22 @@ class MainActivity : AppCompatActivity() {
         binding.fabAdd.setOnClickListener {
             val intent = Intent(this, AddEditActivity::class.java)
             addEditActivityResultLauncher.launch(intent)
-    }
+        }
     }
 
-    private fun onDelete(position : Int) { //position -> 투두 -> id값 넘겨주기
+    private fun onDelete(position: Int) {
         val todo = todoList[position]
-        todoStorage.deleteTodos(todo.id!!) //DATA Update
+        todoStorage.deleteTodos(todo.id!!) // DATA Update
         todoList.removeAt(position)
         adapter.updateData(todoList)
-
     }
 
-    private fun onUpdate(position : Int){
+    private fun onUpdate(position: Int) {
         val todo: Todo = todoList[position]
         val intent = Intent(this, AddEditActivity::class.java).apply {
-            putExtra("id", todo.id)         // id도 전달
-            putExtra("todo", todo.todo)    // 제목 전달
-            putExtra("task", todo.task)    // 상세 설명 전달
+            putExtra("todoId", todo.id) // ID도 전달
+            putExtra("todo", todo.todo) // 제목 전달
+            putExtra("task", todo.task) // 상세 설명 전달
         }
         addEditActivityResultLauncher.launch(intent)
     }
