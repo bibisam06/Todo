@@ -18,17 +18,9 @@ class MainActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         val data = result.data
-        if (result.resultCode == RESULT_OK && data != null) {
-            val todoId = data.getIntExtra("todoId", -1)
-            val updatedTodo = data.getStringExtra("todo") ?: ""
-            val updatedTask = data.getStringExtra("task") ?: ""
-
-            val position = todoList.indexOfFirst { it.id == todoId }
-            if (position != -1) {
-                // 기존 항목 업데이트
-                todoList[position] = todoList[position].copy(todo = updatedTodo, task = updatedTask)
-                adapter.notifyItemChanged(position) // 어댑터 갱신
-            }
+        if (result.resultCode == RESULT_OK) {
+            todoList = todoStorage.loadTodos()
+            adapter.updateData(todoList)
         }
     }
 
