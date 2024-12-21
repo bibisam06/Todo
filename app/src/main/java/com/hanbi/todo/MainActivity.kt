@@ -18,21 +18,20 @@ class MainActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         val data = result.data
-        if (data != null) {
+        if (result.resultCode == RESULT_OK && data != null) {
             val todoId = data.getIntExtra("todoId", -1)
             val updatedTodo = data.getStringExtra("todo") ?: ""
             val updatedTask = data.getStringExtra("task") ?: ""
 
-            // 리스트에서 해당 ID의 Todo를 찾아 수정
-            todoList.find { it.id == todoId }?.apply {
-                this.todo = updatedTodo
-                this.task = updatedTask
+            val position = todoList.indexOfFirst { it.id == todoId }
+            if (position != -1) {
+                // 기존 항목 업데이트
+                todoList[position] = todoList[position].copy(todo = updatedTodo, task = updatedTask)
+                adapter.notifyItemChanged(position) // 어댑터 갱신
             }
-
-            // RecyclerView 갱신
-            adapter.updateData(todoList)
         }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

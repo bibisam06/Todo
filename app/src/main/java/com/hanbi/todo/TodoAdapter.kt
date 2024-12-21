@@ -14,7 +14,7 @@ import com.hanbi.todo.databinding.ItemTodoBinding
 class TodoAdapter(
     private var todoList: MutableList<Todo>,
     private val onDelete : (Int) -> Unit,
-    private val onUpdate : (Int) -> Unit,
+    private val onUpdate : (Int) -> Unit
 
 ) : RecyclerView.Adapter<TodoAdapter.TodoHolder>(){
 

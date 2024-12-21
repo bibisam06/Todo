@@ -11,6 +11,7 @@ class AddEditActivity : AppCompatActivity() {
     private lateinit var todoStorage: TodoStorage
     private lateinit var todoList: MutableList<Todo>
     private var todoId: Int? = null
+    private lateinit var adapter: TodoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +39,9 @@ class AddEditActivity : AppCompatActivity() {
                         putExtra("todo", todo)    // 수정된 제목
                         putExtra("task", task)    // 수정된 내용
                     }
+                    val newTodo = Todo(id = todoId, todo = todo, task = task)
                     setResult(RESULT_OK, resultIntent) // 결과 전달
+                   // adapter.
                     finish() // AddEditActivity 종료
                 }
                 else{
