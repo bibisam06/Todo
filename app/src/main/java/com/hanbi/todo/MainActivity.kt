@@ -24,6 +24,9 @@ class MainActivity : AppCompatActivity() {
 
             // RecyclerView 갱신
             adapter.updateData(todoList)
+        }else{
+            todoList = todoStorage.loadTodos()
+            adapter.updateData(todoList)
         }
     }
 
